@@ -9,7 +9,7 @@
 <body class="bg-gray-900 text-white">
 
     <nav class="p-6 bg-black border-b border-orange-500">
-        <h1 class="text-3xl font-bold text-orange-500 text-center">NEXURA LAB</h1>
+        <h1 class="text-3xl font-bold text-orange-500 text-center">NEXURA </h1>
     </nav>
 
     <div class="max-w-6xl mx-auto p-4">
@@ -19,7 +19,7 @@
         </div>
 
         <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
-            <h2 class="text-2xl font-semibold border-l-4 border-orange-500 pl-4">Últimas Curiosidades</h2>
+            <h2 class="text-2xl font-semibold border-l-4 border-orange-500 pl-4">Últimas </h2>
             
             <div class="flex bg-gray-950 p-1 rounded-xl border border-gray-800 self-start md:self-auto font-mono text-xs shadow-md">
                 <button onclick="filterCategory('todos')" id="btn-todos" class="px-4 py-2 rounded-lg bg-orange-600 text-black font-bold transition duration-200">

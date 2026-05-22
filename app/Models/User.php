@@ -27,4 +27,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function isAdmin(): bool
+{
+    // Si tu correo de admin local es este, eres administrador
+    return $this->email === 'admin@local.com'; 
+}
 }
