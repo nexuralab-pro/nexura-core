@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $post->titulo }} | Nexura Lab</title>
@@ -18,7 +18,7 @@
         <h1 class="text-4xl md:text-6xl font-black mb-6 text-orange-500 leading-tight tracking-tighter mt-6">{{ $post->titulo }}</h1>
         
         <div class="rounded-2xl overflow-hidden shadow-2xl mb-10 border border-gray-800">
-            <img src="/storage/{{ $post->imagen_portada }}" class="w-full object-cover">
+            <img src="/{{ str_replace('storage/', '', $post->imagen_portada) }}" class="w-full object-cover">
         </div>
 
         <div class="max-w-none text-xl mb-12 text-gray-300 space-y-8">
@@ -38,10 +38,10 @@
                         </div>
                     @endif
 
-                    {{-- 2. BLOQUE IMAGEN EXTRA --}}
+                    {{-- 2. BLOQUE IMAGEN EXTRA (FIJO: Limpieza de path interno) --}}
                     @if($bloque['type'] === 'imagen')
                         <div class="rounded-2xl overflow-hidden shadow-2xl my-6 border border-gray-800">
-                            <img src="/storage/{{ $bloque['data']['ruta'] }}" class="w-full object-cover">
+                            <img src="/{{ str_replace('storage/', '', $bloque['data']['ruta']) }}" class="w-full object-cover">
                             @if(!empty($bloque['data']['pie_foto']))
                                 <p class="text-sm text-gray-500 text-center mt-2 italic">{{ $bloque['data']['pie_foto'] }}</p>
                             @endif
@@ -102,7 +102,7 @@
         </div>
 
         <div class="rounded-2xl overflow-hidden shadow-2xl mb-12 border border-gray-800">
-            <img src="/storage/{{ $post->imagen_cuerpo }}" class="w-full object-cover">
+            <img src="/{{ str_replace('storage/', '', $post->imagen_cuerpo) }}" class="w-full object-cover">
         </div>
 
         @if($post->url_afiliado)
