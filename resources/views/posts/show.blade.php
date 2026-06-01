@@ -1,27 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $post->titulo }} | Nexura Lab</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .ads-glow { box-shadow: 0 0 15px rgba(255, 165, 0, 0.1); }
-    </style>
 </head>
-<body class="bg-gray-900 text-white leading-relaxed">
+<body class="bg-gray-900 text-white leading-relaxed flex flex-col min-h-screen">
 
     <nav class="p-4 bg-black border-b border-orange-500 sticky top-0 z-50">
-      <a href="{{ url('/') }}" class="text-orange-500 font-bold hover:text-orange-400">← NEXURA LAB | TECH & TERROR</a>
+        <a href="{{ url('/') }}" class="text-orange-500 font-bold hover:text-orange-400">← NEXURA LAB | TECH & TERROR</a>
     </nav>
 
-    <article class="max-w-4xl mx-auto p-6">
-        <div class="w-full min-h-[90px] bg-gray-800/50 my-6 flex flex-col items-center justify-center border border-dashed border-gray-700 rounded-lg text-gray-500 ads-glow">
-            <span class="text-xs font-mono uppercase mb-1">Publicidad de Google</span>
-            <div class="text-sm italic"> Aquí va el banner horizontal de 728x90 </div>
-        </div>
+    <article class="max-w-4xl mx-auto p-6 flex-grow w-full">
 
-        <h1 class="text-4xl md:text-6xl font-black mb-6 text-orange-500 leading-tight tracking-tighter">{{ $post->titulo }}</h1>
+        <h1 class="text-4xl md:text-6xl font-black mb-6 text-orange-500 leading-tight tracking-tighter mt-6">{{ $post->titulo }}</h1>
         
         <div class="rounded-2xl overflow-hidden shadow-2xl mb-10 border border-gray-800">
             <img src="/storage/{{ $post->imagen_portada }}" class="w-full object-cover">
@@ -29,7 +23,7 @@
 
         <div class="max-w-none text-xl mb-12 text-gray-300 space-y-8">
             
-            {{-- Renderizado del contenido viejo (por si acaso) --}}
+            {{-- Renderizado del contenido heredado --}}
             <div class="prose prose-invert max-w-none mb-6">
                 {!! $post->contenido !!}
             </div>
@@ -85,10 +79,9 @@
                         </div>
                     @endif
 
-                    {{-- 5. BLOQUE DE ANUNCIO MANUAL --}}
-                    @if($bloque['type'] === 'bloque_adsense')
-                        <div class="w-full flex flex-col items-center justify-center my-10 min-h-[250px] bg-gray-800/20 p-4 border border-gray-800 rounded-xl">
-                            <span class="text-[10px] font-mono text-gray-600 uppercase tracking-widest mb-2">Anuncio Premium Recomendado</span>
+                    {{-- 5. BLOQUE DE ANUNCIO DINÁMICO (Oculto hasta aprobación) --}}
+                    @if($bloque['type'] === 'bloque_adsense' && !empty($bloque['data']['codigo_anuncio']))
+                        <div class="w-full flex flex-col items-center justify-center my-10">
                             {!! $bloque['data']['codigo_anuncio'] !!}
                         </div>
                     @endif
@@ -100,10 +93,10 @@
         <div class="bg-black/40 p-4 border-l-4 border-orange-600 my-10 rounded-r-lg">
             <p class="text-xs text-orange-500 font-bold mb-2 uppercase">Recomendado para ti:</p>
             <div class="flex items-center gap-4">
-                <div class="w-20 h-20 bg-gray-700 rounded shrink-0"></div>
+                <div class="w-20 h-20 bg-gray-800 rounded shrink-0 border border-gray-700 flex items-center justify-center text-xl">🛡️</div>
                 <div>
-                    <p class="text-sm font-semibold">¿Quieres proteger tu PC de este virus?</p>
-                    <p class="text-xs text-gray-500">Haz clic para ver las mejores ofertas en Antivirus 2026.</p>
+                    <p class="text-sm font-semibold">Análisis Avanzado de Seguridad</p>
+                    <p class="text-xs text-gray-500">Mantente al tanto de las últimas metodologías de protección de servidores en Nexura Lab.</p>
                 </div>
             </div>
         </div>
@@ -124,20 +117,19 @@
             </div>
         @endif
 
-        <div class="w-full h-64 bg-gray-800/30 my-12 flex items-center justify-center border border-gray-700 rounded-lg text-gray-600">
-            <div class="text-center">
-                <p class="text-xs mb-2">Anuncios que te pueden interesar</p>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="w-32 h-32 bg-gray-700/50 rounded"></div>
-                    <div class="w-32 h-32 bg-gray-700/50 rounded"></div>
-                </div>
-            </div>
-        </div>
-
     </article>
 
-    <footer class="p-12 bg-black text-center text-gray-600 border-t border-gray-900">
-        Nexura Lab © 2026 - Sistemas y Tecnología.
+    <footer class="w-full bg-black py-6 border-t border-gray-950 text-center text-xs text-gray-600 font-mono mt-auto">
+        <p>&copy; 2026 Nexura Lab. Todos los derechos reservados.</p>
+        <p class="mt-2 space-x-3">
+            <a href="{{ route('privacy') }}" class="text-gray-500 hover:text-orange-500 transition underline">
+                Política de Privacidad
+            </a>
+            <span class="text-gray-800">|</span>
+            <a href="{{ route('privacidad') }}" class="text-gray-500 hover:text-orange-500 transition underline">
+                Aviso Legal
+            </a>
+        </p>
     </footer>
 
 </body>

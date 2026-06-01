@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Privacidad - Nexura Lab</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white">
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
 
     <nav class="p-6 bg-black border-b border-orange-500">
         <h1 class="text-3xl font-bold text-orange-500 text-center">
@@ -14,7 +15,7 @@
         </h1>
     </nav>
 
-    <div class="max-w-4xl mx-auto p-6 my-12 bg-gray-950 border border-gray-800 rounded-2xl shadow-2xl">
+    <div class="max-w-4xl mx-auto p-6 my-12 bg-gray-950 border border-gray-800 rounded-2xl shadow-2xl flex-grow w-full md:w-auto">
         <h2 class="text-3xl font-black text-orange-500 uppercase tracking-wider mb-6 border-l-4 border-orange-500 pl-4">
             Política de Privacidad
         </h2>
@@ -51,6 +52,19 @@
             </section>
         </div>
     </div>
+
+    <footer class="w-full bg-black py-6 border-t border-gray-950 text-center text-xs text-gray-600 font-mono mt-auto">
+        <p>&copy; 2026 Nexura Lab. Todos los derechos reservados.</p>
+        <p class="mt-2 space-x-3">
+            <a href="{{ route('privacy') }}" class="text-gray-500 hover:text-orange-500 transition underline">
+                Política de Privacidad
+            </a>
+            <span class="text-gray-800">|</span>
+            <a href="{{ route('privacidad') }}" class="text-gray-500 hover:text-orange-500 transition underline">
+                Aviso Legal
+            </a>
+        </p>
+    </footer>
 
 </body>
 </html>

@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexura Lab</title>
+    <title>Nexura Lab | Tech & Terror</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900 text-white">
 
     <nav class="p-6 bg-black border-b border-orange-500">
-        <h1 class="text-3xl font-bold text-orange-500 text-center">NEXURA </h1>
+        <h1 class="text-3xl font-bold text-orange-500 text-center">NEXURA LAB</h1>
     </nav>
 
     <div class="max-w-6xl mx-auto p-4">
         
-        <div class="w-full h-24 bg-gray-800 my-6 flex items-center justify-center border border-dashed border-gray-600 text-gray-400">
-            [ ESPACIO PARA BANNER PUBLICIDAD ADSENSE ]
-        </div>
-
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
-            <h2 class="text-2xl font-semibold border-l-4 border-orange-500 pl-4">Últimas </h2>
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 mt-6 gap-4">
+            <h2 class="text-2xl font-semibold border-l-4 border-orange-500 pl-4">Últimas Publicaciones</h2>
             
             <div class="flex bg-gray-950 p-1 rounded-xl border border-gray-800 self-start md:self-auto font-mono text-xs shadow-md">
                 <button onclick="filterCategory('todos')" id="btn-todos" class="px-4 py-2 rounded-lg bg-orange-600 text-black font-bold transition duration-200">
@@ -37,7 +34,6 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 transition-all duration-300">
             @foreach($posts as $post)
                 @php
-                    // Lógica del analizador de contenido para asignar categorías dinámicamente
                     $textoParaAnalizar = Str::lower($post->titulo . ' ' . $post->contenido);
                     $esTerror = Str::contains($textoParaAnalizar, ['terror', 'virus', 'hack', 'misterio', 'ataque', 'caida', 'fantasma', 'malware', 'troyano', 'ransomware']);
                     $categoria = $esTerror ? 'terror' : 'tech';
@@ -80,12 +76,10 @@
                                         $urlOriginal = $video->video_url;
                                         $embedUrl = '';
 
-                                        // Motor Regex para limpiar URLs de YouTube/Shorts
                                         if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?|shorts)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/i', $urlOriginal, $matches)) {
                                             $videoId = $matches[1];
                                             $embedUrl = "https://www.youtube.com/embed/" . trim($videoId);
                                         } 
-                                        // Parseador para URLs de TikTok
                                         elseif (str_contains($urlOriginal, 'tiktok.com')) {
                                             if (str_contains($urlOriginal, '/video/')) {
                                                 $parts = explode('/video/', $urlOriginal);
@@ -171,12 +165,21 @@
 
             </div>
         </section>
-
-        <div class="w-full h-24 bg-gray-800 mt-12 flex items-center justify-center border border-dashed border-gray-600 text-gray-400">
-            [ ESPACIO PARA BANNER PUBLICIDAD ADSENSE ]
-        </div>
         
     </div>
+
+    <footer class="w-full bg-black py-6 border-t border-gray-950 text-center text-xs text-gray-600 font-mono">
+        <p>&copy; 2026 Nexura Lab. Todos los derechos reservados.</p>
+        <p class="mt-2 space-x-3">
+            <a href="{{ route('privacy') }}" class="text-gray-500 hover:text-orange-500 transition underline">
+                Política de Privacidad
+            </a>
+            <span class="text-gray-800">|</span>
+            <a href="{{ route('privacidad') }}" class="text-gray-500 hover:text-orange-500 transition underline">
+                Aviso Legal
+            </a>
+        </p>
+    </footer>
 
     <script>
         function filterCategory(category) {
@@ -187,7 +190,6 @@
                 terror: document.getElementById('btn-terror')
             };
 
-            // 1. Alternar estilos activos de los botones
             Object.keys(buttons).forEach(key => {
                 if (key === category) {
                     if (key === 'terror') {
@@ -201,7 +203,6 @@
                 }
             });
 
-            // 2. Ejecutar filtros con transición de escala y opacidad
             cards.forEach(card => {
                 const cardCategory = card.getAttribute('data-category');
                 
@@ -221,14 +222,5 @@
             });
         }
     </script>
-<footer class="w-full bg-black py-6 border-t border-gray-950 mt-12 text-center text-xs text-gray-600 font-mono">
-    <p>&copy; 2026 Nexura Lab. Todos los derechos reservados.</p>
-    <p class="mt-2">
-        <a href="{{ route('privacy') }}" class="text-gray-500 hover:text-orange-500 transition mx-3 underline">
-            Política de Privacidad
-        </a>
-    </p>
-</footer>
-
 </body>
 </html>
